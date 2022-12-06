@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: udaconnect-kafka
-  name: udaconnect-kafka
+    service: udaconnect-kafka-producer
+  name: udaconnect-kafka-producer
 spec:
   ports:
   - name: "5001"
@@ -11,28 +11,28 @@ spec:
     targetPort: 5001
     nodePort: 30002
   selector:
-    service: udaconnect-kafka
+    service: udaconnect-kafka-producer
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: udaconnect-kafka
-  name: udaconnect-kafka
+    service: udaconnect-kafka-producer
+  name: udaconnect-kafka-producer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: udaconnect-kafka
+      service: udaconnect-kafka-producer
   template:
     metadata:
       labels:
-        service: udaconnect-kafka
+        service: udaconnect-kafka-producer
     spec:
       containers:
       - image: hosamelbasiony/udaconnect-location-producer:v1.0.0
-        name: udaconnect-kafka
+        name: udaconnect-kafka-producer
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
