@@ -20,6 +20,11 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 # TODO: This needs better exception handling
 
 
+#  {
+#     "person_id": 1, 
+#     "coordinate": "010100000000ADF9F197925EC0FDA19927D7C64240"
+#  }
+
 @api.route("/locations")
 @api.route("/locations/<location_id>")
 @api.param("location_id", "Unique ID for a given Location", _in="query")

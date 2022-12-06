@@ -27,18 +27,18 @@ def create_app(env=None):
 
     from app.config import KAFKA_SERVER
 
-    # @app.before_request
-    # def before_request():
-    TOPIC_NAME = 'locations'    
-    producer = KafkaProducer(
-        bootstrap_servers=[KAFKA_SERVER],
-        api_version=(0,10,2),
-        value_serializer=serializer
-    )
-    producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2))
-    # consumer = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2),auto_offset_reset='earliest',enable_auto_commit=True,group_id='my-group',value_deserializer=lambda x: loads(x.decode()))
-    g.kafka_producer = producer
-    # g.kafka_consumer=consumer
+    @app.before_request
+    def before_request():
+        TOPIC_NAME = 'locations'    
+        producer = KafkaProducer(
+            bootstrap_servers=[KAFKA_SERVER],
+            api_version=(0,10,2),
+            value_serializer=serializer
+        )
+        producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2))
+        # consumer = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2),auto_offset_reset='earliest',enable_auto_commit=True,group_id='my-group',value_deserializer=lambda x: loads(x.decode()))
+        g.kafka_producer = producer
+        # g.kafka_consumer=consumer
 
     @app.route("/health")
     def health():
