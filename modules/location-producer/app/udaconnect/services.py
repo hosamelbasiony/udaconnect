@@ -9,7 +9,6 @@ from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchema
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
-from json import dumps, loads
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
@@ -117,8 +116,7 @@ class LocationService:
             "longitude": location["longitude"]
         }
         producer = g.kafka_producer
-        producer.send("location", "salam aleykom ya hagggg")
-        # producer.send("location", loads(location))
+        producer.send("location", location)
         producer.flush()
 
         return new_location

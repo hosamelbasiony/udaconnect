@@ -35,7 +35,6 @@ def create_app(env=None):
             api_version=(0,10,2),
             value_serializer=serializer
         )
-        producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2))
         # consumer = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2),auto_offset_reset='earliest',enable_auto_commit=True,group_id='my-group',value_deserializer=lambda x: loads(x.decode()))
         g.kafka_producer = producer
         # g.kafka_consumer=consumer
