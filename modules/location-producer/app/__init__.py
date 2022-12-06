@@ -27,7 +27,9 @@ def get_client_stream_requests():
         time.sleep(1)
 
 def run_grpc_client():
-    with grpc.insecure_channel('localhost:50051') as channel:
+    from app.config import GRPC_SERVER
+    # with grpc.insecure_channel('localhost:50051') as channel:
+    with grpc.insecure_channel(GRPC_SERVER) as channel:
         stub = greet_pb2_grpc.LocationStub(channel)
         print("1. SayHei - Unary")
 

@@ -7,6 +7,7 @@ DB_HOST = os.environ["DB_HOST"]
 DB_PORT = os.environ["DB_PORT"]
 DB_NAME = os.environ["DB_NAME"]
 KAFKA_SERVER = os.environ["KAFKA_SERVER"]
+GRPC_SERVER = os.environ["GRPC_SERVER"]
 
 
 class BaseConfig:
