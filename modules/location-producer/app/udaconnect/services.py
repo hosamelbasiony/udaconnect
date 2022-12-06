@@ -117,7 +117,7 @@ class LocationService:
             "longitude": location["longitude"]
         }
         producer = g.kafka_producer
-        producer.send("location", location["longitude"])
+        producer.send("location", "salam aleykom ya hagggg")
         # producer.send("location", loads(location))
         producer.flush()
 
