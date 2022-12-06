@@ -1,33 +1,3 @@
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: kafka-volume
-  labels:
-    type: local
-    app: kafka
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/kafka"
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: kafka-pv-claim
-  labels:
-    app: kafka
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 256Mi
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -68,12 +38,5 @@ spec:
           ports:
             - containerPort: 9092
           resources: {}
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgresdb
-      volumes:
-        - name: kafka
-          persistentVolumeClaim:
-            claimName: kafka-pv-claim
       restartPolicy: Always
 status: {}
