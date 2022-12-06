@@ -29,11 +29,7 @@ def _add_to_location(location: Dict):
 def consume_message():
     for message in messages:
         location = json.dumps(message.value)
-        _add_to_location({
-            "location": location,
-            "location2": message.value,
-            "type": type(message.value)
-        })
+        _add_to_location(location)
 
 
 logging.basicConfig()
