@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import logo from "./images/UdaConnectLogo.svg";
 import Persons from "./components/Persons";
+import Realtime from "./components/Realtime.js";
 
 function App() {
   return (
@@ -9,7 +10,10 @@ function App() {
       <div className="header">
         <img src={logo} className="App-logo" alt="UdaConnect" />
       </div>
-      <Persons />
+      <div>
+        <Realtime />
+        <Persons />
+      </div>
     </div>
   );
 }

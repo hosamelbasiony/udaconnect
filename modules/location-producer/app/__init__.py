@@ -6,6 +6,66 @@ from kafka import KafkaProducer,KafkaConsumer
 from json import dumps, loads
 import logging
 import os
+import time
+from concurrent import futures
+import grpc
+import threading
+
+import greet_pb2 as greet_pb2
+import greet_pb2_grpc as greet_pb2_grpc
+
+def get_client_stream_requests():
+    while True:
+        # name = input("Please enter a name (or nothing to stop chatting): ")
+
+        # if name == "":
+        #     break
+
+        # hello_request = greet_pb2.HelloRequest(greeting = "Hello", name = name)
+        hello_request = greet_pb2.LocationMessage()
+        yield hello_request
+        time.sleep(1)
+
+def run_grpc_client():
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = greet_pb2_grpc.LocationStub(channel)
+        print("1. SayHei - Unary")
+
+        # location_request = greet_pb2.LocationMessage(
+        #     person_id = 1, 
+        #     person_name = "Bonjour Hoss Al-Nayem", 
+        #     longitude = "12.025",
+        #     latitude = "3569.263",
+        #     creation_time = "2022-01-02 10:00:25",
+        # )
+        # location_replies = stub.ParrotSaysHi(location_request)
+
+        # for reply in location_replies:
+        #     print("\n\n\nParrotSaysHi Response Received:")
+        #     print(reply)
+        #     global socketio
+        #     socketio.emit("location_updates", [{
+        #         "person_id": reply.person_id, 
+        #         "person_name": reply.person_name, 
+        #         "longitude": reply.longitude, 
+        #         "latitude": reply.latitude, 
+        #         "creation_time": reply.creation_time, 
+        #     }], namespace="/npTweet")
+
+        responses = stub.InteractingHi(get_client_stream_requests())
+
+        for reply in responses:
+            print("InteractingHi Response Received: ")
+            print("\n\n\nParrotSaysHi Response Received:")
+            print(reply)
+            # global socketio
+            # socketio.emit("location_updates", [{
+            #     "person_id": reply.person_id, 
+            #     "person_name": reply.person_name, 
+            #     "longitude": reply.longitude, 
+            #     "latitude": reply.latitude, 
+            #     "creation_time": reply.creation_time, 
+            # }], namespace="/npTweet")
 
 db = SQLAlchemy()
 
@@ -44,6 +104,10 @@ def create_app(env=None):
         return jsonify("healthy")
 
     logging.basicConfig()
+
+    b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
+    b.daemon = True
+    b.start()
 
     return app
 
