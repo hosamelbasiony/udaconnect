@@ -6,7 +6,6 @@ from kafka import KafkaProducer,KafkaConsumer
 from json import dumps, loads
 import logging
 import os
-from config import KAFKA_SERVER
 
 db = SQLAlchemy()
 
@@ -25,6 +24,8 @@ def create_app(env=None):
 
     register_routes(api, app)
     db.init_app(app)
+
+    from app.config import KAFKA_SERVER
 
     # @app.before_request
     # def before_request():
