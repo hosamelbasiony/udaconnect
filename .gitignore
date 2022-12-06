@@ -126,3 +126,4 @@ app/app-test.db
 
 steps/
 helpers/
+db/docker/
