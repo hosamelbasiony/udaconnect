@@ -43,8 +43,7 @@ status:
   loadBalancer: {}
 ---
 apiVersion: v1
-# kind: Deployment
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: kafka
 spec:
