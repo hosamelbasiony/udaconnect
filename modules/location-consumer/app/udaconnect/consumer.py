@@ -30,7 +30,8 @@ def consume_message():
     for message in messages:
         # location = json.loads(message.value) #.decode("utf-8"))
         _add_to_location({
-            "location": message.value
+            "location": message.value,
+            "type": type(message.value)
         })
 
 
