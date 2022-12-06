@@ -12,20 +12,20 @@ spec:
 status:
   loadBalancer: {}
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka
+  namespace: {{ .Values.namespace.name }}
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      service: zookeeper
-  strategy: {}
+      app: kafka
   template:
     metadata:
       labels:
-        service: zookeeper
+        app: kafka
     spec:
       containers:
         - env:
@@ -34,9 +34,10 @@ spec:
             - name: KAFKA_ZOOKEEPER_CONNECT
               value: zookeeper:2181
           image: wurstmeister/kafka
+          imagePullPolicy: "IfNotPresent"
           name: kafka
           ports:
             - containerPort: 9092
           resources: {}
       restartPolicy: Always
-status: {}
+
