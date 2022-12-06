@@ -12,6 +12,6 @@ CMD ["python", "-u", "app/udaconnect/consumer.py"]
 
 # docker rmi udaconnect-location-consumer
 # docker build -t udaconnect-location-consumer .
-# docker run -d -p 5555:5000 udaconnect-location-consumer:v1.0.1
-# docker tag udaconnect-location-consumer hosamelbasiony/udaconnect-location-consumer:v1.0.1
-# docker push hosamelbasiony/udaconnect-location-consumer:v1.0.1
+# docker run -d -p 5555:5000 udaconnect-location-consumer:v1.0.2
+# docker tag udaconnect-location-consumer hosamelbasiony/udaconnect-location-consumer:v1.0.2
+# docker push hosamelbasiony/udaconnect-location-consumer:v1.0.2
