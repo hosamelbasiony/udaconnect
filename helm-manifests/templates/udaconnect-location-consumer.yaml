@@ -6,10 +6,10 @@ metadata:
   name: udaconnect-kafka
 spec:
   ports:
-  - name: "5001"
-    port: 5001
-    targetPort: 5001
-    nodePort: 30002
+  - name: "5002"
+    port: 5002
+    targetPort: 5002
+    nodePort: 30003
   selector:
     service: udaconnect-kafka
   type: NodePort
@@ -31,7 +31,7 @@ spec:
         service: udaconnect-kafka
     spec:
       containers:
-      - image: hosamelbasiony/python-kafka-test-1:v1.0.0
+      - image: hosamelbasiony/udaconnect-location-consumer:v1.0.0
         name: udaconnect-kafka
         imagePullPolicy: Always
         env:

@@ -31,7 +31,7 @@ spec:
         service: udaconnect-kafka
     spec:
       containers:
-      - image: hosamelbasiony/python-kafka-test:v1.0.0
+      - image: hosamelbasiony/udaconnect-location-producer:v1.0.0
         name: udaconnect-kafka
         imagePullPolicy: Always
         env:
