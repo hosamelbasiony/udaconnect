@@ -36,11 +36,11 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
             print("**************************************\n")
 
             reply = greet_pb2.LocationMessage()
-            reply.person_name = "Wedny eheheheh eeeeehhh paroooot la moaakhzahhhhh"
-            reply.person_id = 1
-            reply.longitude = "1236.56"
-            reply.latitude = "1236.56"
-            reply.latitude = "2022-01-02 10:00:" + str(random.randint(0, 59))
+            reply.person_name = request["person_name"] #"Wedny eheheheh eeeeehhh paroooot la moaakhzahhhhh"
+            reply.person_id = request["person_id"] #1
+            reply.longitude = request["longitude"] #"1236.56"
+            reply.latitude = request["latitude"] #"1236.56"
+            reply.latitude = request["latitude"] #"2022-01-02 10:00:" + str(random.randint(0, 59))
 
             location = {
                 "person_id": reply.person_id, 
