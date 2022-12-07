@@ -42,24 +42,28 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
             reply.latitude = "1236.56"
             reply.latitude = "2022-01-02 10:00:" + str(random.randint(0, 59))
 
-            global socketio
-            socketio.emit("location_updates", [{
+            location = {
                 "person_id": reply.person_id, 
                 "person_name": reply.person_name, 
                 "longitude": reply.longitude, 
                 "latitude": reply.latitude, 
                 "creation_time": reply.creation_time,
                 "reply": reply
-            }], namespace="/npTweet")
+            }
 
-            socketio.emit("location_updates", [{
-                "person_id": reply.person_id, 
-                "person_name": reply.person_name, 
-                "longitude": reply.longitude, 
-                "latitude": reply.latitude, 
-                "creation_time": reply.creation_time,
-                "reply": reply
-            }])
+            b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
+            b.daemon = True
+            b.start()
+
+            # global socketio
+            # socketio.emit("location_updates", [{
+            #     "person_id": reply.person_id, 
+            #     "person_name": reply.person_name, 
+            #     "longitude": reply.longitude, 
+            #     "latitude": reply.latitude, 
+            #     "creation_time": reply.creation_time,
+            #     "reply": reply
+            # }], namespace="/npTweet")
 
             print("Websocket event emitted")
             print("**************************************\n\n")
@@ -74,15 +78,10 @@ def serve_grpc():
     server.start()
     server.wait_for_termination()
 
-def location_updates():
+def location_updates(location):
     global socketio
     print("Start streaming locations...")
-    socketio.emit("location_updates",  [{
-        "person_id": 1, 
-        "longitude": "30.605240974982205", 
-        "latitude": "32.29687938288871",
-        "creation_time": "2022-08-18 10:37:06.000000"
-    }], namespace="/npTweet")
+    socketio.emit("location_updates",  [location], namespace="/npTweet")
     
 app = Flask(__name__)
 
@@ -105,7 +104,14 @@ def tweetStreaming():
 
 @socketio.on("location_updates", namespace="/npTweet")
 def tweetStreaming():
-    b = threading.Thread(name='location_updates', target=location_updates)
+    location = {
+        "person_name": "Home resident user", 
+        "person_id": 1, 
+        "longitude": "30.605240974982205", 
+        "latitude": "32.29687938288871",
+        "creation_time": "2022-08-18 10:37:06.000000"
+    }
+    b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
     b.daemon = True
     b.start()
     # print("Start streaming locations...")
@@ -123,4 +129,4 @@ if __name__ == "__main__":
     b.daemon = True
     b.start()
     
-    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True, async_mode='threading')
+    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)

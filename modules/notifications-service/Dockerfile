@@ -10,7 +10,9 @@ EXPOSE 5005
 COPY . .
 CMD ["python", "-u", "app/app.py"]
 
-# update_container.sh v1.2.6
+# ./update_container.sh v1.2.7
+
+
 # docker rmi udaconnect-notifications-service
 # docker build -t udaconnect-notifications-service .
 
