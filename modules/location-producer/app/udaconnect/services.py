@@ -1,3 +1,4 @@
+import threading
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
@@ -152,7 +153,9 @@ class LocationService:
         producer.flush()
 
         # alert notification service with grpc
-        # run_grpc_client()
+        b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
+        b.daemon = True
+        b.start()
 
         return new_location
 
