@@ -9,11 +9,11 @@ import greet_pb2_grpc as greet_pb2_grpc
 
 def get_client_stream_requests(location):
     location_request = greet_pb2.LocationMessage(
-        person_id = location.person_id, 
-        person_name = "in grpc service - " + location.person_name, 
-        longitude = location.longitude,
-        latitude = location.latitude,
-        creation_time = location.creation_time,
+        person_id = location["person_id"], 
+        person_name = "in grpc service - " + location["person_name"], 
+        longitude = location["longitude"],
+        latitude = location["latitude"],
+        creation_time = location["creation_time"],
     )    
     yield location_request
 
