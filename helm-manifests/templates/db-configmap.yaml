@@ -6,7 +6,7 @@ data:
   DB_HOST: "postgres"
   DB_PORT: "5432"
   KAFKA_SERVER: "kafka-headless:9092"
-  GRPC_SERVER: "udaconnect-notifications-service:30005"
+  GRPC_SERVER: "udaconnect-notifications-service:30050"
 metadata:
   name: db-env
   namespace: {{ .Values.namespace.name }}

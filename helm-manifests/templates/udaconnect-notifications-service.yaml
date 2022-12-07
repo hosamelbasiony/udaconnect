@@ -10,6 +10,10 @@ spec:
     port: 5005
     targetPort: 5005
     nodePort: 30005
+  - name: "30050"
+    port: 30050
+    targetPort: 30050
+    nodePort: 30050
   selector:
     service: udaconnect-notifications-service
   type: NodePort
