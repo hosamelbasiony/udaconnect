@@ -21,8 +21,14 @@ def get_client_stream_requests():
         # if name == "":
         #     break
 
-        # hello_request = greet_pb2.HelloRequest(greeting = "Hello", name = name)
-        hello_request = greet_pb2.LocationMessage()
+        hello_request = greet_pb2.LocationMessage(
+            person_id = 1, 
+            person_name = "Bonjour Hoss Al-Nayem", 
+            longitude = "12.025",
+            latitude = "3569.263",
+            creation_time = "3011-11-25 11:22:33",
+        )
+        
         yield hello_request
         time.sleep(1)
 

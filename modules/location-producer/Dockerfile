@@ -15,10 +15,10 @@ CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5001"]
 # docker rmi udaconnect-location-producer
 # docker build -t udaconnect-location-producer .
 
-# docker run -d -p 5555:5000 udaconnect-location-producer:v1.0.8
+# docker run -d -p 5555:5000 udaconnect-location-producer:v1.0.9
 
-# docker tag udaconnect-location-producer hosamelbasiony/udaconnect-location-producer:v1.0.8
-# docker push hosamelbasiony/udaconnect-location-producer:v1.0.8
+# docker tag udaconnect-location-producer hosamelbasiony/udaconnect-location-producer:v1.0.9
+# docker push hosamelbasiony/udaconnect-location-producer:v1.0.9
 
 
 # flask run --host 0.0.0.0 --port 5001
