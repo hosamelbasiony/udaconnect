@@ -6,6 +6,7 @@ import grpc
 import greet_pb2 as greet_pb2
 import greet_pb2_grpc as greet_pb2_grpc
 import time
+import random
 import threading
 from concurrent import futures
 
