@@ -106,11 +106,10 @@ class LocationService:
             logger.warning(f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
 
-        new_location = Location()
-        new_location = Location()
-        new_location.id = location["person_id"]
-        new_location.creation_time = location["creation_time"]
-        new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
+        # new_location = Location()
+        # new_location.id = location["person_id"]
+        # new_location.creation_time = location["creation_time"]
+        # new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
         # db.session.add(new_location)
         # db.session.commit()
 
@@ -130,7 +129,8 @@ class LocationService:
         b.daemon = True
         b.start()
 
-        return new_location
+        # return new_location
+        return location
 
 
 class PersonService:
