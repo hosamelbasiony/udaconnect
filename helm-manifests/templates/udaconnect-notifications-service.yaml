@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       labels:
-        service: udaconnect-notifications-service
+        service: udaconnect-notifications-service 
     spec:
       containers:
       - image: hosamelbasiony/udaconnect-notifications-service:v1.0.9
