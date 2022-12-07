@@ -8,10 +8,10 @@ RUN pip install -r requirements.txt
 EXPOSE 5005
 
 COPY . .
-CMD ["python", "-u", "app/app.py", "--allow_unsafe_werkzeug", "True"]
+CMD ["python", "-u", "app/app.py"]
 
 # docker rmi udaconnect-notifications-service
 # docker build -t udaconnect-notifications-service .
 
-# docker tag udaconnect-notifications-service hosamelbasiony/udaconnect-notifications-service:v1.2.0
-# docker push hosamelbasiony/udaconnect-notifications-service:v1.2.0
+# docker tag udaconnect-notifications-service hosamelbasiony/udaconnect-notifications-service:v1.2.1
+# docker push hosamelbasiony/udaconnect-notifications-service:v1.2.1
