@@ -117,7 +117,7 @@ class LocationService:
             "person_id": location["person_id"],
             "person_name": "Yet to get- Name",
             "latitude": location["latitude"],
-            "longitude": location["longitude"]
+            "longitude": location["longitude"],
             "creation_time": location["creation_time"]
         }
         producer = g.kafka_producer
