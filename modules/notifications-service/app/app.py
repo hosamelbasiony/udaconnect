@@ -10,6 +10,9 @@ import random
 import threading
 from concurrent import futures
 
+import eventlet
+eventlet.monkey_patch()
+
 class LocationServicer(greet_pb2_grpc.LocationServicer):
     def SayHi(self, request, context):
         print("SayHi LocationServicer Request Made:")
@@ -90,7 +93,7 @@ def location_updates(location):
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "secret!"
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 def root():
     return app.send_static_file("index.html")

@@ -120,8 +120,6 @@ class LocationService:
             "longitude": location["longitude"],
             "creation_time": location["creation_time"]
         }
-
-        # SEND LOCATION TO KAFKA
         producer = g.kafka_producer
         producer.send("location", location)
         producer.flush()
