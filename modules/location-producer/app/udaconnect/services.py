@@ -106,12 +106,12 @@ class LocationService:
             logger.warning(f"Unexpected data format in payload: {validation_results}")
             raise Exception(f"Invalid payload: {validation_results}")
 
-        # new_location = Location()
-        # new_location.id = location["person_id"]
-        # new_location.creation_time = location["creation_time"]
-        # new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
-        # db.session.add(new_location)
-        # db.session.commit()
+        new_location = Location()
+        new_location.person_id = location["person_id"]
+        new_location.creation_time = location["creation_time"]
+        new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
+        db.session.add(new_location)
+        db.session.commit()
 
         location = {
             "person_id": location["person_id"],
@@ -120,6 +120,8 @@ class LocationService:
             "longitude": location["longitude"],
             "creation_time": location["creation_time"]
         }
+
+        # SEND LOCATION TO KAFKA
         producer = g.kafka_producer
         producer.send("location", location)
         producer.flush()
@@ -129,8 +131,7 @@ class LocationService:
         b.daemon = True
         b.start()
 
-        # return new_location
-        return location
+        return new_location
 
 
 class PersonService:
