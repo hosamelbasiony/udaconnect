@@ -33,6 +33,14 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def post(self) -> Location:
         request.get_json()
+
+        ######################################################
+        # Send to kafka
+        # For now send to notifications service over gRPC
+        ######################################################
+        
+        ######################################################
+        ######################################################
         location: Location = LocationService.create(request.get_json())
         return location
 
