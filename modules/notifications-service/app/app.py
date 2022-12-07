@@ -33,6 +33,7 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
         for request in request_iterator:
             print(request)
             print("Interacting gRPC Request Made")
+            print("**************************************\n")
 
             reply = greet_pb2.LocationMessage()
             reply.person_name = "Wedny eheheheh eeeeehhh paroooot la moaakhzahhhhh"
@@ -48,7 +49,20 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
                 "longitude": reply.longitude, 
                 "latitude": reply.latitude, 
                 "creation_time": reply.creation_time,
+                "reply": reply
             }], namespace="/npTweet")
+
+            socketio.emit("location_updates", [{
+                "person_id": reply.person_id, 
+                "person_name": reply.person_name, 
+                "longitude": reply.longitude, 
+                "latitude": reply.latitude, 
+                "creation_time": reply.creation_time,
+                "reply": reply
+            }])
+
+            print("Websocket event emitted")
+            print("**************************************\n\n")
 
             yield reply
 
@@ -108,5 +122,5 @@ if __name__ == "__main__":
     b = threading.Thread(name='serve_grpc', target=serve_grpc)
     b.daemon = True
     b.start()
-
-    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
+    
+    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True, async_mode='threading')

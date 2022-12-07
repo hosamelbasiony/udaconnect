@@ -15,7 +15,7 @@ def get_client_stream_requests(location):
         latitude = location["latitude"],
         creation_time = location["creation_time"],
     )    
-    yield location_request
+    # yield location_request
 
 def run_grpc_client(location):
     from app.config import GRPC_SERVER
