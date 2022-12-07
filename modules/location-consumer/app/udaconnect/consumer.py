@@ -23,7 +23,7 @@ def insert_location(location):
     # session.close()
 
     print('INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}));'.format(
-            int(location.person_id), float(location.latitude), float(location.longitude)))
+             int(location["person_id"]), float(location["latitude"]), float(location["longitude"])))
 
     print("Location added to the database!")
     print(location)
