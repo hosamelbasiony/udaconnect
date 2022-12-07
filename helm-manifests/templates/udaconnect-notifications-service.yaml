@@ -25,7 +25,7 @@ metadata:
     service: udaconnect-notifications-service
   name: udaconnect-notifications-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       service: udaconnect-notifications-service
