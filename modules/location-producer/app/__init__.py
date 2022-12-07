@@ -117,9 +117,9 @@ def create_app(env=None):
 
     logging.basicConfig()
 
-    b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
-    b.daemon = True
-    b.start()
+    # b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
+    # b.daemon = True
+    # b.start()
 
     return app
 

@@ -1,3 +1,5 @@
+import threading
+import grpc
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
@@ -12,6 +14,38 @@ from sqlalchemy.sql import text
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
+
+
+import greet_pb2 as greet_pb2
+import greet_pb2_grpc as greet_pb2_grpc
+
+def get_client_stream_requests():
+    hello_request = greet_pb2.LocationMessage(
+        person_id = 1, 
+        person_name = "Bonjour Hoss Al-Nayem", 
+        longitude = "12.025",
+        latitude = "3569.263",
+        creation_time = "3011-11-25 11:22:33",
+    )    
+    yield hello_request
+
+def run_grpc_client():
+    from app.config import GRPC_SERVER
+    
+    print("***********************************************")
+    print("\n\nTRYING TO CONNECT TO GRPC_SERVER AT: " + GRPC_SERVER + "\n\n")
+    print("***********************************************")
+
+    with grpc.insecure_channel(GRPC_SERVER) as channel:
+        stub = greet_pb2_grpc.LocationStub(channel)
+        print("run_grpc_client ... running")
+
+        responses = stub.InteractingHi(get_client_stream_requests())
+
+        for reply in responses:
+            print("InteractingHi Response Received: ")
+            print("\n\n\nParrotSaysHi Response Received:")
+            print(reply)
 
 
 class ConnectionService:
@@ -118,6 +152,11 @@ class LocationService:
         producer = g.kafka_producer
         producer.send("location", location)
         producer.flush()
+
+        # alert notification service with grpc
+        b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
+        b.daemon = True
+        b.start()
 
         return new_location
 
