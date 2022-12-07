@@ -81,7 +81,7 @@ def serve_grpc():
 def location_updates(location):
     global socketio
     print("Start streaming locations...")
-    socketio.emit("location_updates",  [location], namespace="/npTweet")
+    socketio.emit("location_updates",  [json.dumps(location)], namespace="/npTweet")
     
 app = Flask(__name__)
 
