@@ -12,14 +12,17 @@ messages = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(
 
 
 def insert_location(location: Dict):
-    session = psycopg2.connect(dbname=DB_NAME, port=DB_PORT, user=DB_USERNAME, password=DB_PASSWORD, host=DB_HOST)
-    cursor = session.cursor()
-    cursor.execute(
-        'INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}));'.format(
+    # session = psycopg2.connect(dbname=DB_NAME, port=DB_PORT, user=DB_USERNAME, password=DB_PASSWORD, host=DB_HOST)
+    # cursor = session.cursor()
+    # cursor.execute(
+    #     'INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}));'.format(
+    #         int(location["person_id"]), float(location["latitude"]), float(location["longitude"])))
+    # session.commit()
+    # cursor.close()
+    # session.close()
+
+    print('INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}));'.format(
             int(location["person_id"]), float(location["latitude"]), float(location["longitude"])))
-    session.commit()
-    cursor.close()
-    session.close()
 
     print("Location added to the database!")
     print(location)
