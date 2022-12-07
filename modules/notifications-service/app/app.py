@@ -87,6 +87,7 @@ def location_updates(location):
         "longitude": location["longitude"], 
         "latitude": location["latitude"], 
         "creation_time": location["creation_time"], 
+        "reply": location["reply"], 
     }], namespace="/npTweet")
     
 app = Flask(__name__)
@@ -117,9 +118,9 @@ def tweetStreaming():
         "latitude": "32.29687938288871",
         "creation_time": "2022-08-18 10:37:06.000000"
     }
-    b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
-    b.daemon = True
-    b.start()
+    # b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
+    # b.daemon = True
+    # b.start()
     # print("Start streaming locations...")
     # socketio.emit("location_updates",  [{
     #     "person_id": 1, 

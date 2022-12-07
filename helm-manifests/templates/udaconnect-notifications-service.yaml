@@ -25,7 +25,7 @@ metadata:
     service: udaconnect-notifications-service
   name: udaconnect-notifications-service
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       service: udaconnect-notifications-service
@@ -35,7 +35,7 @@ spec:
         service: udaconnect-notifications-service 
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-notifications-service:v1.3.0
+      - image: hosamelbasiony/udaconnect-notifications-service:v1.3.1
         name: udaconnect-notifications-service
         imagePullPolicy: Always
         env:
