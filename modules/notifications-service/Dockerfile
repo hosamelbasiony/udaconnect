@@ -13,5 +13,5 @@ CMD ["python", "-u", "app/app.py"]
 # docker rmi udaconnect-notifications-service
 # docker build -t udaconnect-notifications-service .
 
-# docker tag udaconnect-notifications-service hosamelbasiony/udaconnect-notifications-service:v1.2.3
-# docker push hosamelbasiony/udaconnect-notifications-service:v1.2.3
+# docker tag udaconnect-notifications-service hosamelbasiony/udaconnect-notifications-service:v1.2.4
+# docker push hosamelbasiony/udaconnect-notifications-service:v1.2.4

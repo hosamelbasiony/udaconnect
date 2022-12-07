@@ -60,6 +60,16 @@ def serve_grpc():
     server.start()
     server.wait_for_termination()
 
+def location_updates():
+    global socketio
+    print("Start streaming locations...")
+    socketio.emit("location_updates",  [{
+        "person_id": 1, 
+        "longitude": "30.605240974982205", 
+        "latitude": "32.29687938288871",
+        "creation_time": "2022-08-18 10:37:06.000000"
+    }], namespace="/npTweet")
+    
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "secret!"
@@ -78,16 +88,6 @@ def connectServer():
 def tweetStreaming():
     print("Start streaming tweets...")
     socketio.emit("streamTweets", {"stream_result": "test"}, namespace="/npTweet")
-
-def location_updates:
-    global socketio
-    print("Start streaming locations...")
-    socketio.emit("location_updates",  [{
-        "person_id": 1, 
-        "longitude": "30.605240974982205", 
-        "latitude": "32.29687938288871",
-        "creation_time": "2022-08-18 10:37:06.000000"
-    }], namespace="/npTweet")
 
 @socketio.on("location_updates", namespace="/npTweet")
 def tweetStreaming():
