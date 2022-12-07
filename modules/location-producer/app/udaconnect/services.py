@@ -152,7 +152,7 @@ class LocationService:
         producer.flush()
 
         # alert notification service with grpc
-        run_grpc_client()
+        # run_grpc_client()
 
         return new_location
 
