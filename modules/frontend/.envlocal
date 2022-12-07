@@ -1,0 +1,4 @@
+SKIP_PREFLIGHT_CHECK=true
+REACT_APP_API_KEY = 'my-secret-api-key'
+REACT_APP_API_URL = 'my-secret-api-key'
+REACT_APP_WS_URL = 'http://135.181.92.250:30005/npTweet'

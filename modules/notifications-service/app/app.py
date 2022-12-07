@@ -55,16 +55,6 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
             b.daemon = True
             b.start()
 
-            # global socketio
-            # socketio.emit("location_updates", [{
-            #     "person_id": reply.person_id, 
-            #     "person_name": reply.person_name, 
-            #     "longitude": reply.longitude, 
-            #     "latitude": reply.latitude, 
-            #     "creation_time": reply.creation_time,
-            #     "reply": reply
-            # }], namespace="/npTweet")
-
             print("Websocket event emitted")
             print("**************************************\n\n")
 
@@ -80,7 +70,7 @@ def serve_grpc():
 
 def location_updates(location):
     global socketio
-    print("Start streaming locations...")
+    print("Send location to connected users...\n")
     socketio.emit("location_updates",  [{
         "person_name": location["person_name"], 
         "person_id": location["person_id"], 
@@ -88,6 +78,14 @@ def location_updates(location):
         "latitude": location["latitude"], 
         "creation_time": location["creation_time"],
     }], namespace="/npTweet")
+
+    socketio.emit("location_updates",  [{
+        "person_name": location["person_name"], 
+        "person_id": location["person_id"], 
+        "longitude": location["longitude"], 
+        "latitude": location["latitude"], 
+        "creation_time": location["creation_time"],
+    }])
     
 app = Flask(__name__)
 

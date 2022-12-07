@@ -5,7 +5,7 @@ class Persons extends Component {
   constructor(props) {
     super(props);
     // TODO: endpoint should be abstracted into a config variable
-    this.endpoint_url = "http://localhost:30001/api/persons";
+    this.endpoint_url = "http://135.181.92.250:30001/api/persons";
     this.state = {
       persons: [],
       display: null,
@@ -15,7 +15,11 @@ class Persons extends Component {
   componentDidMount() {
     fetch(this.endpoint_url)
       .then((response) => response.json())
-      .then((data) => this.setState({ persons: data }));
+      .then((data) => {
+        this.setState({ persons: data });
+        const setPersons = this.props.store.setPersons;
+        setPersons(data)
+      });
   }
 
   setDisplay = (personId) => {

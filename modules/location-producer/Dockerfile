@@ -11,13 +11,6 @@ EXPOSE 5001
 COPY . .
 CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5001"]
 
-
-# docker rmi udaconnect-location-producer
-# docker build -t udaconnect-location-producer .
-
-
-# docker tag udaconnect-location-producer hosamelbasiony/udaconnect-location-producer:v1.1.8
-# docker push hosamelbasiony/udaconnect-location-producer:v1.1.8
-
+# sudo ./update_container.sh v1.1.9
 
 # flask run --host 0.0.0.0 --port 5001

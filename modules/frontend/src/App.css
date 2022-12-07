@@ -88,6 +88,20 @@ body {
   font: bold 1.25rem monospace;
 }
 
+.checkin-container {
+  border: 1px solid #02b3e4;
+  font: bold 1.1rem "Oswald", sans-serif;
+  margin: 0 0.75rem;
+  border-radius: 0.75rem;
+  background: #02b3e4;
+}
+.person-name {
+  color: #0f2cbd;
+  margin-right: 0.5rem;
+  transition: all 1s ease;
+  /* color: #2e3d49; */
+}
+
 @media only screen and (min-width: 600px) {
   .lists {
     flex-wrap: nowrap;

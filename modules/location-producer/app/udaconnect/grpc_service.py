@@ -4,6 +4,8 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
 
+from app import db
+
 import greet_pb2 as greet_pb2
 import greet_pb2_grpc as greet_pb2_grpc
 

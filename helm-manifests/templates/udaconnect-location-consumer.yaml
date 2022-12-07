@@ -31,7 +31,7 @@ spec:
         service: udaconnect-kafka-consumer
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-location-consumer:v1.0.7
+      - image: hosamelbasiony/udaconnect-location-consumer:v1.0.8
         name: udaconnect-kafka-consumer
         imagePullPolicy: Always
         env:
