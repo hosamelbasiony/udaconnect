@@ -33,7 +33,7 @@ def insert_location(location):
 def consume_message():
     for message in messages:
         # location = json.dumps(message.value)
-        insert_location(location)
+        insert_location(message.value)
 
 
 logging.basicConfig()
