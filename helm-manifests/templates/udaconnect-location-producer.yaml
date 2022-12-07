@@ -31,7 +31,7 @@ spec:
         service: udaconnect-kafka-producer
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-location-producer:v1.1.2
+      - image: hosamelbasiony/udaconnect-location-producer:v1.1.3
         name: udaconnect-kafka-producer
         imagePullPolicy: Always
         env:

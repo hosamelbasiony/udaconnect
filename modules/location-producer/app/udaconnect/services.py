@@ -154,9 +154,9 @@ class LocationService:
         producer.flush()
 
         # alert notification service with grpc
-        b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
-        b.daemon = True
-        b.start()
+        # b = threading.Thread(name='run_grpc_client', target=run_grpc_client)
+        # b.daemon = True
+        # b.start()
 
         return new_location
 
