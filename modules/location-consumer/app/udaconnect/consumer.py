@@ -11,7 +11,8 @@ TOPIC_NAME = 'location'
 messages = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2),auto_offset_reset='earliest',enable_auto_commit=True,group_id='my-group',value_deserializer=lambda x: json.loads(x.decode()))
 
 
-def insert_location(location: Dict):
+# def insert_location(location: Dict):
+def insert_location(location):
     # session = psycopg2.connect(dbname=DB_NAME, port=DB_PORT, user=DB_USERNAME, password=DB_PASSWORD, host=DB_HOST)
     # cursor = session.cursor()
     # cursor.execute(
@@ -22,7 +23,7 @@ def insert_location(location: Dict):
     # session.close()
 
     print('INSERT INTO location (person_id, coordinate) VALUES ({}, ST_Point({}, {}));'.format(
-            int(location["person_id"]), float(location["latitude"]), float(location["longitude"])))
+            int(location.person_id), float(location.latitude), float(location.longitude)))
 
     print("Location added to the database!")
     print(location)
@@ -31,7 +32,7 @@ def insert_location(location: Dict):
 
 def consume_message():
     for message in messages:
-        location = json.dumps(message.value)
+        # location = json.dumps(message.value)
         insert_location(location)
 
 
