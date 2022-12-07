@@ -31,8 +31,8 @@ class LocationServicer(greet_pb2_grpc.LocationServicer):
     
     def InteractingHi(self, request_iterator, context):
         for request in request_iterator:
-            print("InteractingHi Request Made:")
             print(request)
+            print("Interacting gRPC Request Made")
 
             reply = greet_pb2.LocationMessage()
             reply.person_name = "Wedny eheheheh eeeeehhh paroooot la moaakhzahhhhh"
@@ -79,8 +79,8 @@ def tweetStreaming():
     print("Start streaming tweets...")
     socketio.emit("streamTweets", {"stream_result": "test"}, namespace="/npTweet")
 
-@socketio.on("location_updates", namespace="/npTweet")
-def tweetStreaming():
+def location_updates:
+    global socketio
     print("Start streaming locations...")
     socketio.emit("location_updates",  [{
         "person_id": 1, 
@@ -88,6 +88,19 @@ def tweetStreaming():
         "latitude": "32.29687938288871",
         "creation_time": "2022-08-18 10:37:06.000000"
     }], namespace="/npTweet")
+
+@socketio.on("location_updates", namespace="/npTweet")
+def tweetStreaming():
+    b = threading.Thread(name='location_updates', target=location_updates)
+    b.daemon = True
+    b.start()
+    # print("Start streaming locations...")
+    # socketio.emit("location_updates",  [{
+    #     "person_id": 1, 
+    #     "longitude": "30.605240974982205", 
+    #     "latitude": "32.29687938288871",
+    #     "creation_time": "2022-08-18 10:37:06.000000"
+    # }], namespace="/npTweet")
 
 
 if __name__ == "__main__":
