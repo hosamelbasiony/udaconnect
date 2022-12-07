@@ -31,7 +31,7 @@ spec:
         service: udaconnect-notifications-service 
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-notifications-service:v1.0.9
+      - image: hosamelbasiony/udaconnect-notifications-service:v1.2.0
         name: udaconnect-notifications-service
         imagePullPolicy: Always
         env:
