@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import (
@@ -31,18 +32,22 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 class LocationResource(Resource):
     @accepts(schema=LocationSchema)
     @responds(schema=LocationSchema)
-    def post(self) -> Location:
-        request.get_json()
-
-        ######################################################
-        # Send to kafka
-        # For now send to notifications service over gRPC
-        ######################################################
+    def post(self):
+        request.get_json()        
+        # location: Location = LocationService.create(request.get_json())
         
-        ######################################################
-        ######################################################
-        location: Location = LocationService.create(request.get_json())
-        return location
+        time_stamp = time.time()
+        print(time_stamp)
+        return {
+            "payload": "added to queue at " + str(time_stamp)
+        }
+
+
+    # def post(self) -> Location:
+    #     request.get_json()
+
+    #     location: Location = LocationService.create(request.get_json())
+    #     return location
 
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
