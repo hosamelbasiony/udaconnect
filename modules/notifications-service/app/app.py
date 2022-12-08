@@ -11,8 +11,8 @@ import threading
 import multiprocessing
 from concurrent import futures
 
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 
 def background(): 
     """ do something in the background """ 
@@ -81,8 +81,8 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
             b.join()
             print("\nThread joined \n**************************************\n")
 
-            greenth = eventlet.spawn(background, location) 
-            greenth.link(callback) 
+            # greenth = eventlet.spawn(background, location) 
+            # greenth.link(callback) 
 
 def serve_grpc():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
