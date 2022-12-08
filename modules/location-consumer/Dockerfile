@@ -10,7 +10,7 @@ EXPOSE 5002
 COPY . .
 CMD ["python", "-u", "app/udaconnect/consumer.py"]
 
-# sudo ./update_container.sh v1.2.0
+# sudo ./update_container.sh v1.2.1
 
 # docker rmi udaconnect-location-consumer
 # docker build -t udaconnect-location-consumer .

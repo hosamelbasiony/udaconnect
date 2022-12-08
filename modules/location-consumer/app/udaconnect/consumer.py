@@ -10,11 +10,9 @@ from config import DB_USERNAME, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, KAFKA_SE
 from grpc_service import run_grpc_client
 
 TOPIC_NAME = 'location'
-# messages = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
 messages = KafkaConsumer(TOPIC_NAME,bootstrap_servers=KAFKA_SERVER,api_version=(0,10,2),auto_offset_reset='earliest',enable_auto_commit=True,group_id='my-group',value_deserializer=lambda x: json.loads(x.decode()))
 
 
-# def insert_location(location: Dict):
 def insert_location(location):
     try:
         session = psycopg2.connect(dbname=DB_NAME, port=DB_PORT, user=DB_USERNAME, password=DB_PASSWORD, host=DB_HOST)
