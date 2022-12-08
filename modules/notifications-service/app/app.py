@@ -8,6 +8,7 @@ import location_pb2_grpc as location_pb2_grpc
 import time
 import random
 import threading
+import multiprocessing
 from concurrent import futures
 
 class LocationServicer(location_pb2_grpc.LocationServicer):
@@ -51,9 +52,12 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
                 "reply": reply
             }
 
-            b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
-            b.daemon = True
-            b.start()
+            # b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
+            # b.daemon = True
+            # b.start()
+
+            thread = multiprocessing.Process(target=serve_grpc, args=('location',))
+            thread.start()
 
             print("Websocket event emitted")
             print("**************************************\n\n")
@@ -78,7 +82,7 @@ def location_updates(location):
         "longitude": location["longitude"], 
         "latitude": location["latitude"], 
         "creation_time": location["creation_time"],
-    }], namespace="/npTweet")
+    }], namespace="/locationCheckin")
 
     socketio.emit("location_updates",  [{
         "person_name": location["person_name"], 
@@ -96,33 +100,36 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 def root():
     return app.send_static_file("index.html")
 
-@socketio.on("connect", namespace="/npTweet")
+@socketio.on("connect", namespace="/locationCheckin")
 def connectServer():
     print("Client connected")
-    socketio.emit("connected", namespace="/npTweet")
+    socketio.emit("connected", namespace="/locationCheckin")
 
 
-@socketio.on("startTweets", namespace="/npTweet")
+@socketio.on("startTweets", namespace="/locationCheckin")
 def tweetStreaming():
     print("Start streaming tweets...")
-    socketio.emit("streamTweets", {"stream_result": "test"}, namespace="/npTweet")
+    socketio.emit("streamTweets", {"stream_result": "test"}, namespace="/locationCheckin")
 
-@socketio.on("location_updates", namespace="/npTweet")
-def tweetStreaming():
-    location = {
-        "person_name": "Home resident user", 
-        "person_id": 1, 
-        "longitude": "30.605240974982205", 
-        "latitude": "32.29687938288871",
-        "creation_time": "2022-08-18 10:37:06.000000"
-    }
+# @socketio.on("location_updates", namespace="/locationCheckin")
+# def tweetStreaming():
+#     location = {
+#         "person_name": "Home resident user", 
+#         "person_id": 1, 
+#         "longitude": "30.605240974982205", 
+#         "latitude": "32.29687938288871",
+#         "creation_time": "2022-08-18 10:37:06.000000"
+#     }
 
 
 if __name__ == "__main__":
     
-    b = threading.Thread(name='serve_grpc', target=serve_grpc)
-    b.daemon = True
-    b.start()
+    # b = threading.Thread(name='serve_grpc', target=serve_grpc)
+    # b.daemon = True
+    # b.start()
+
+    thread = multiprocessing.Process(target=serve_grpc)
+    thread.start()
     
     socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
 

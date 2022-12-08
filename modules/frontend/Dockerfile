@@ -1,5 +1,5 @@
-# FROM node:14.8.0-alpine3.12
-FROM node:16.11.1-bullseye
+FROM node:14.8.0-alpine3.12
+# FROM node:16.11.1-bullseye
 
 WORKDIR .
 
@@ -19,5 +19,5 @@ EXPOSE 3000
 
 CMD ["npm", "start"]
 
-# ./update_container.sh v1.0.2
+# ./update_container.sh v1.4.5
 
