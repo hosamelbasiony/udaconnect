@@ -21,7 +21,7 @@ metadata:
     service: udaconnect-kafka-consumer
   name: udaconnect-kafka-consumer
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       service: udaconnect-kafka-consumer
