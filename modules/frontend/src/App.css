@@ -94,12 +94,18 @@ body {
   margin: 0 0.75rem;
   border-radius: 0.75rem;
   background: #02b3e4;
+  cursor: pointer;
 }
 .person-name {
   color: #0f2cbd;
   margin-right: 0.5rem;
   transition: all 1s ease;
   /* color: #2e3d49; */
+}
+.checkin-mock {
+  margin: auto;
+  padding: 1rem;
+  text-align: center;
 }
 
 @media only screen and (min-width: 600px) {

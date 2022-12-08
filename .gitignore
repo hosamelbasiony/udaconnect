@@ -127,3 +127,7 @@ app/app-test.db
 steps/
 helpers/
 db/docker/
+
+aliases.md
+updateapp.sh
+git.sh

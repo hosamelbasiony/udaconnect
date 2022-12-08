@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import io from 'socket.io-client';
-import { useAppStore } from '../appStore'
+import moment from 'moment'
 
 class Realtime extends Component {
   constructor(props) {
@@ -45,10 +45,42 @@ class Realtime extends Component {
 
   }
 
+  mockCheckIn = () => {
+    let longitude = (Math.round((Math.random()*360 - 180) * 1000)/1000).toString();
+    let latitude = (Math.round((Math.random()*360 - 180) * 1000)/1000).toString();
+
+    const randomIndex = Math.floor(Math.random() * this.props.store.persons.length);
+    const person = this.props.store.persons[randomIndex];
+    
+    const payload = {
+      person_id: person.id, 
+      longitude,
+      latitude,
+      creation_time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss.SSSSSS")
+      // creation_time: "2022-08-18 10:37:06.000000"
+    }
+
+    fetch(`${process.env.REACT_APP_LOCATIONS_API_URL}/locations`, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  };
+
   render() {
     return (
       this.state.liveLocations.length?
-      (<div className="lists checkin-container">
+      (<div className="lists checkin-container" onClick={() => this.mockCheckIn()}>
         <ul>
             {this.state.liveLocations.map((location, index) => (
               <li key={index} >
@@ -66,7 +98,10 @@ class Realtime extends Component {
             "latitude": "32.29687938288871",
             "creation_time": "2022-08-18 10:37:06.000000"
           } */}
-      </div>):""
+        </div>):
+        <div className="lists checkin-container" onClick={() => this.mockCheckIn()}>
+          <h3 className="checkin-mock">Click here to mock random location checkin</h3>          
+        </div>
     );
   }
 }
