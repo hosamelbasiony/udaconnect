@@ -62,7 +62,7 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
             print("Websocket event emitted")
             print("**************************************\n\n")
 
-            yield reply
+            # yield reply
             b.join()
             print("\nThread joined \n**************************************\n\n")
 
