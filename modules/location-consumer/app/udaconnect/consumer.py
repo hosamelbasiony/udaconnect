@@ -7,7 +7,7 @@ import psycopg2
 import logging
 from config import DB_USERNAME, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, KAFKA_SERVER
 
-from app.udaconnect.grpc_service import run_grpc_client
+from grpc_service import run_grpc_client
 
 TOPIC_NAME = 'location'
 # messages = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
