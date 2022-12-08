@@ -65,7 +65,7 @@ def run_grpc_client(location):
     print("***********************************************")
 
     with grpc.insecure_channel(GRPC_SERVER) as channel:
-        stub = location_pb2.LocationStub(channel)
+        stub = location_pb2_grpc.LocationStub(channel)
         print("run_grpc_client ... running")
 
         responses = stub.LocationCheckIn(get_client_stream_requests(location))
