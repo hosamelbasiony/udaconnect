@@ -136,4 +136,5 @@ if __name__ == "__main__":
     b.daemon = True
     b.start()
     
-    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
+    # socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
+    socketio.run(app, debug=True, host="0.0.0.0", port=5005)

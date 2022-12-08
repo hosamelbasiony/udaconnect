@@ -10,4 +10,4 @@ EXPOSE 5005
 COPY . .
 CMD ["python", "-u", "app/app.py"]
 
-# ./update_container.sh v1.3.6
+# ./update_container.sh v1.3.7
