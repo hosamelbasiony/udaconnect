@@ -17,4 +17,3 @@ python-socketio==5.7.2
 typing-extensions==4.4.0
 Werkzeug==2.2.2
 zipp==3.11.0
-eventlet==0.30.2
