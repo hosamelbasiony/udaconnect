@@ -36,12 +36,6 @@ class LocationResource(Resource):
         request.get_json()        
         # location: Location = LocationService.create(request.get_json())
         
-        time_stamp = time.time()
-        print(time_stamp)
-        return {
-            "payload": "added to queue at " + str(time_stamp)
-        }
-
         location = request.get_json();
 
         location = {
@@ -54,6 +48,12 @@ class LocationResource(Resource):
         producer = g.kafka_producer
         producer.send("location", location)
         producer.flush()
+
+        time_stamp = time.time()
+        print(time_stamp)
+        return {
+            "payload": "added to queue at " + str(time_stamp)
+        }
 
 
     # def post(self) -> Location:
