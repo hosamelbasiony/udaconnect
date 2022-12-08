@@ -11,6 +11,21 @@ import threading
 import multiprocessing
 from concurrent import futures
 
+import eventlet
+eventlet.monkey_patch()
+
+def background(): 
+    """ do something in the background """ 
+    print('[background] working in the background...') 
+    time.sleep(2) 
+    print('[background] done.') 
+    return 42 
+
+def callback(gt, *args, **kwargs): 
+    """ this function is called when results are available """ 
+    result = gt.wait() 
+    print("[cb] %s" % result) 
+
 class LocationServicer(location_pb2_grpc.LocationServicer):
     def SayHi(self, request, context):
         print("SayHi LocationServicer Request Made:")
@@ -60,11 +75,14 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
             # thread.start()
 
             print("Websocket event emitted")
-            print("**************************************\n\n")
+            print("**************************************\n")
 
             yield reply
             b.join()
-            print("\nThread joined \n**************************************\n\n")
+            print("\nThread joined \n**************************************\n")
+
+            greenth = eventlet.spawn(background, location) 
+            greenth.link(callback) 
 
 def serve_grpc():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
