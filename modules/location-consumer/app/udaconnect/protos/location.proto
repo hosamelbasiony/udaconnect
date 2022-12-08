@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package greet;
+
+// The location service definition.
+service Location {
+	rpc LocationCheckIn (stream LocationMessage) returns (stream LocationMessage);
+}
+
+message LocationMessage {   
+	int32 person_id = 1;
+	string person_name = 2;
+	string longitude = 3;
+	string latitude = 4;
+	string creation_time = 5;
+}
+
+message Empty {
+
+}
+
+message LocationMessageList {
+	repeated LocationMessage locations = 1;
+}
+
+service LocationService {
+	rpc Create(LocationMessage) returns (LocationMessage);
+	rpc Get(Empty) returns (LocationMessageList);
+}
+
+// python -m grpc_tools.protoc -I protos --python_out=./ --grpc_python_out=./ greet.proto

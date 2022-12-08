@@ -12,7 +12,7 @@ from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchem
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
-from app.udaconnect.grpc_service import run_grpc_client
+# from app.udaconnect.grpc_service import run_grpc_client
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
