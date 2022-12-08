@@ -33,7 +33,7 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-app:v1.4.7
+      - image: hosamelbasiony/udaconnect-app:v1.4.8
         name: udaconnect-app
         imagePullPolicy: Always
         resources:

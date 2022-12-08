@@ -99,6 +99,7 @@ body {
 .person-name {
   color: #0f2cbd;
   margin-right: 0.5rem;
+  margin-left: 0.5rem;
   transition: all 1s ease;
   /* color: #2e3d49; */
 }

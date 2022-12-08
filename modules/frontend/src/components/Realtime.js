@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import io from 'socket.io-client';
 import moment from 'moment'
 
+let counter = 0;
+
 class Realtime extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +30,8 @@ class Realtime extends Component {
       socket.on("location_updates", (data) => {
           console.log("listen location updates...");
           console.log(data)
+
+          counter += 1
           
           this.setState({
             liveLocations: data.map( x => {
@@ -35,6 +39,7 @@ class Realtime extends Component {
               let person = this.props.store.persons.find( p => p.id == x.person_id);
               return {
                 ...x,
+                counter,
                 person_name: person? `${ person.first_name } ${ person.last_name }` : "Undefined person",
                 company_name: person? person.company_name : "Undefined company"
               }
@@ -45,7 +50,7 @@ class Realtime extends Component {
 
   }
 
-  mockCheckIn = () => {
+  doMockCheckIn = () => {
     let longitude = (Math.round((Math.random()*360 - 180) * 1000)/1000).toString();
     let latitude = (Math.round((Math.random()*360 - 180) * 1000)/1000).toString();
 
@@ -77,7 +82,27 @@ class Realtime extends Component {
 
   };
 
+  mockCheckIn = () => {
+    const randomIntFromInterval = (min, max) => { // min and max included 
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }  
+
+    let count = 50,
+      time = 100;
+
+    const invoke = () => {
+        count -= 1;
+        time = randomIntFromInterval(100, 2000); //some new value
+        this.doMockCheckIn();
+        if ( count > 0 ) window.setTimeout(invoke, time);
+    }
+    window.setTimeout(invoke, time);
+  }
+
   render() {
+    window.mockCheckIn = this.mockCheckIn;
+    // for (let x =0; x<100; x++) setTimeout(window.mockCheckIn, 1000);
+
     return (
       this.state.liveLocations.length?
       (<div className="lists checkin-container" onClick={() => this.mockCheckIn()}>
@@ -86,7 +111,7 @@ class Realtime extends Component {
               <li key={index} >
                 <h3>
                   {/* { location.creation_time.substring(0, 19) }: {location.person_name}  {location.longitude} {location.latitude}  */}
-                  <i className="person-name">{location.person_name}</i>just checked in at {location.longitude} {location.latitude} 
+                  {location.counter}-<i className="person-name">{location.person_name}</i>just checked in at {location.longitude} {location.latitude} 
                 </h3>
               </li>
             ))}
@@ -100,7 +125,7 @@ class Realtime extends Component {
           } */}
         </div>):
         <div className="lists checkin-container" onClick={() => this.mockCheckIn()}>
-          <h3 className="checkin-mock">Click here to mock random location checkin</h3>          
+          <h3 className="checkin-mock">Click here to mock 100 random location checkin</h3>          
         </div>
     );
   }
