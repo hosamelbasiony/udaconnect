@@ -10,8 +10,8 @@ import random
 import threading
 from concurrent import futures
 
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 
 class LocationServicer(greet_pb2_grpc.LocationServicer):
     def SayHi(self, request, context):
@@ -93,7 +93,7 @@ def location_updates(location):
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "secret!"
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 def root():
     return app.send_static_file("index.html")
@@ -136,5 +136,4 @@ if __name__ == "__main__":
     b.daemon = True
     b.start()
     
-    # socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
-    socketio.run(app, debug=True, host="0.0.0.0", port=5005)
+    socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
