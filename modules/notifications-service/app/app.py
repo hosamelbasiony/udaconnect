@@ -62,9 +62,9 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
             print("Websocket event emitted")
             print("**************************************\n\n")
 
-            b.join()
-
             yield reply
+            b.join()
+            print("\nThread joined \n**************************************\n\n")
 
 def serve_grpc():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
