@@ -10,8 +10,8 @@ import random
 import threading
 from concurrent import futures
 
-import eventlet
-eventlet.monkey_patch()
+# import eventlet
+# eventlet.monkey_patch()
 
 class LocationServicer(greet_pb2_grpc.LocationServicer):
     def SayHi(self, request, context):
