@@ -31,7 +31,7 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 @api.param("location_id", "Unique ID for a given Location", _in="query")
 class LocationResource(Resource):
     @accepts(schema=LocationSchema)
-    @responds(schema=LocationSchema)
+    # @responds(schema=LocationSchema)
     def post(self):
         request.get_json()        
         # location: Location = LocationService.create(request.get_json())
@@ -41,6 +41,19 @@ class LocationResource(Resource):
         return {
             "payload": "added to queue at " + str(time_stamp)
         }
+
+        location = request.get_json();
+
+        location = {
+            "person_id": location["person_id"],
+            "person_name": "Yet to get- Name",
+            "latitude": location["latitude"],
+            "longitude": location["longitude"],
+            "creation_time": location["creation_time"]
+        }
+        producer = g.kafka_producer
+        producer.send("location", location)
+        producer.flush()
 
 
     # def post(self) -> Location:

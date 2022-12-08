@@ -113,16 +113,16 @@ class LocationService:
         db.session.add(new_location)
         db.session.commit()
 
-        location = {
-            "person_id": location["person_id"],
-            "person_name": "Yet to get- Name",
-            "latitude": location["latitude"],
-            "longitude": location["longitude"],
-            "creation_time": location["creation_time"]
-        }
-        producer = g.kafka_producer
-        producer.send("location", location)
-        producer.flush()
+        # location = {
+        #     "person_id": location["person_id"],
+        #     "person_name": "Yet to get- Name",
+        #     "latitude": location["latitude"],
+        #     "longitude": location["longitude"],
+        #     "creation_time": location["creation_time"]
+        # }
+        # producer = g.kafka_producer
+        # producer.send("location", location)
+        # producer.flush()
 
         # # alert notification service with grpc
         # b = threading.Thread(name='run_grpc_client', target=run_grpc_client, args=(location,))
