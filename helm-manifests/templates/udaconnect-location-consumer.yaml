@@ -31,7 +31,7 @@ spec:
         service: udaconnect-kafka-consumer
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-location-consumer:v1.1.4
+      - image: hosamelbasiony/udaconnect-location-consumer:v1.1.6
         name: udaconnect-kafka-consumer
         imagePullPolicy: Always
         env:
@@ -65,4 +65,9 @@ spec:
             configMapKeyRef:
               name: db-env
               key: KAFKA_SERVER
+        - name: GRPC_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: db-env
+              key: GRPC_SERVER
       restartPolicy: Always

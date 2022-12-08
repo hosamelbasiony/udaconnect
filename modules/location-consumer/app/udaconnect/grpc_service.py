@@ -3,8 +3,7 @@ import grpc
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
-
-from app import db
+import os
 
 import greet_pb2 as greet_pb2
 import greet_pb2_grpc as greet_pb2_grpc
@@ -20,7 +19,9 @@ def get_client_stream_requests(location):
     yield location_request
 
 def run_grpc_client(location):
-    from app.config import GRPC_SERVER
+    
+    GRPC_SERVER = os.environ["GRPC_SERVER"]
+
     
     print("***********************************************")
     print("\n\nTRYING TO CONNECT TO GRPC_SERVER AT: " + GRPC_SERVER + "\n\n")
