@@ -5,6 +5,8 @@ WORKDIR .
 COPY package.json ./
 COPY package-lock.json ./
 
+RUN npm i webpack -g
+RUN npm link webpack
 RUN npm install
 RUN npm install react-scripts@3.4.3 -g
 
