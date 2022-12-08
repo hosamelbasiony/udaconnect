@@ -62,7 +62,7 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
             print("Websocket event emitted")
             print("**************************************\n\n")
 
-            # yield reply
+            yield reply
             b.join()
             print("\nThread joined \n**************************************\n\n")
 
@@ -77,7 +77,7 @@ def serve_grpc():
 
 def location_updates(location):
     global socketio
-    print("Send location to connected users...\n")
+    print("Sending " + location["person_name"] + " location to connected users...\n")
     socketio.emit("location_updates",  [{
         "person_name": location["person_name"], 
         "person_id": location["person_id"], 
@@ -93,6 +93,8 @@ def location_updates(location):
     #     "latitude": location["latitude"], 
     #     "creation_time": location["creation_time"],
     # }])
+
+    time.sleep(2)
     
 app = Flask(__name__)
 
