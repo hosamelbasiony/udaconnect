@@ -52,12 +52,12 @@ class LocationServicer(location_pb2_grpc.LocationServicer):
                 "reply": reply
             }
 
-            # b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
-            # b.daemon = True
-            # b.start()
+            b = threading.Thread(name='location_updates', target=location_updates, args=(location,))
+            b.daemon = True
+            b.start()
 
-            thread = multiprocessing.Process(target=serve_grpc, args=('location',))
-            thread.start()
+            # thread = multiprocessing.Process(target=serve_grpc, args=('location',))
+            # thread.start()
 
             print("Websocket event emitted")
             print("**************************************\n\n")
@@ -124,12 +124,12 @@ def tweetStreaming():
 
 if __name__ == "__main__":
     
-    # b = threading.Thread(name='serve_grpc', target=serve_grpc)
-    # b.daemon = True
-    # b.start()
+    b = threading.Thread(name='serve_grpc', target=serve_grpc)
+    b.daemon = True
+    b.start()
 
-    thread = multiprocessing.Process(target=serve_grpc)
-    thread.start()
+    # thread = multiprocessing.Process(target=serve_grpc)
+    # thread.start()
     
     socketio.run(app, debug=True, host="0.0.0.0", port=5005, allow_unsafe_werkzeug=True)
 
