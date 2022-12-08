@@ -1,10 +1,13 @@
 from __future__ import annotations
+import threading
 from typing import Dict
 import json
 from kafka import KafkaConsumer
 import psycopg2
 import logging
 from config import DB_USERNAME, DB_HOST, DB_NAME, DB_PORT, DB_PASSWORD, KAFKA_SERVER
+
+from app.udaconnect.grpc_service import run_grpc_client
 
 TOPIC_NAME = 'location'
 # messages = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
@@ -27,6 +30,13 @@ def insert_location(location):
 
     print("Location added to the database!")
     print(location)
+
+    # alert notification service with grpc
+    b = threading.Thread(name='run_grpc_client', target=run_grpc_client, args=(location,))
+    b.daemon = True
+    b.start()
+
+
     return location
 
 
