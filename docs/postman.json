@@ -68,6 +68,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Create person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"company_name\": \"Tarqeem LIS\", \r\n    \"first_name\": \"Hosam\", \r\n    \"last_name\": \"Al-Basiony\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl1}}/persons",
+					"host": [
+						"{{baseurl1}}"
+					],
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -94,6 +120,11 @@
 		{
 			"key": "baseurl",
 			"value": "http://135.181.92.250:30002/api",
+			"type": "string"
+		},
+		{
+			"key": "baseurl1",
+			"value": "http://135.181.92.250:30001/api",
 			"type": "string"
 		}
 	]
