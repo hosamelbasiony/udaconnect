@@ -7,3 +7,10 @@
 - #### api port 30001
 - #### locations api port 30004
 - #### webscocket notification server port 30005
+
+## Sample app can be acceseed at http://135.181.92.250:30000/
+
+<br>
+
+![alt text](docs/app.png)
+
