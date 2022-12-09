@@ -51,10 +51,10 @@ class PersonsResource(Resource):
         persons: List[Person] = PersonService.retrieve_all()
         return persons
 
-    @responds(schema=PersonSchema, many=True)
-    def delete(self, person_id) -> Person:
-        person: Person = PersonService.delete(person_id)
-        return person
+    # @responds(schema=PersonSchema, many=True)
+    # def delete(self, person_id) -> Person:
+    #     person: Person = PersonService.delete(person_id)
+    #     return person
 
 
 @api.route("/persons/<person_id>")

@@ -129,12 +129,12 @@ class PersonService:
         person = db.session.query(Person).get(person_id)
         return person
 
-    @staticmethod
-    def delete(person_id: int) -> Person:
-        person = db.session.query(Person).get(person_id)
-        db.session.delete(person)
-        db.session.commit()
-        return person
+    # @staticmethod
+    # def delete(person_id: int) -> Person:
+    #     person = db.session.query(Person).get(person_id)
+    #     db.session.delete(person)
+    #     db.session.commit()
+    #     return person
 
     @staticmethod
     def retrieve_all() -> List[Person]:
