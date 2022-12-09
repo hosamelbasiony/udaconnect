@@ -28,12 +28,12 @@ class LocationService:
         location.wkt_shape = coord_text
         return location
 
-        @staticmethod
-        def person(person_id) -> List[Location]:
-            locations = (
-                db.session.query(Location)
-                .filter(Location.person_id == person_id)
-                .all()
-            )
-            return locations
+    @staticmethod
+    def person(person_id) -> List[Location]:
+        locations = (
+            db.session.query(Location)
+            .filter(Location.person_id == person_id)
+            .all()
+        )
+        return locations
 
