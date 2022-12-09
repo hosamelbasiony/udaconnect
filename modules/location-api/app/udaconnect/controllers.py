@@ -56,25 +56,15 @@ class LocationResource(Resource):
 @api.doc(resposes={200: "Success"})
 @api.doc(resposes={404: "Query not found"})
 class LocationResource(Resource):
-    @responds(schema=LocationSchema)
+    @responds(schema=LocationSchema, many=True)
     def get(self) ->List[Location]:
-        locations = LocationService.retrieve_all()
-        print(locations)
-        return {
-            "success": "OK"
-            "locations": locations
-        }
+        return LocationService.retrieve_all()
 
 @api.route("/person/locations/<person_id>")
 @api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
 @api.doc(resposes={200: "Success"})
 @api.doc(resposes={404: "Query not found"})
 class LocationResource(Resource):
-    @responds(schema=LocationSchema)
+    @responds(schema=LocationSchema, many=True)
     def get(self, person_id) -> List[Location]:
-        locations = LocationService.person(person_id)
-        print(locations)
-        return {
-            "success": "OK"
-            "locations": locations
-        }
+        return LocationService.person(person_id)
