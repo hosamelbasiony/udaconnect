@@ -52,6 +52,7 @@ class LocationResource(Resource):
         location: Location = LocationService.retrieve(location_id)
         return location
 
+@api.route("/person/locations")
 @api.route("/person/locations/<person_id>")
 @api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
 @api.doc(resposes={200: "Success"})
@@ -60,3 +61,7 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, person_id) ->List[Location]:
         return LocationService.person(person_id)
+
+    @responds(schema=LocationSchema)
+    def get(self) ->List[Location]:
+        return LocationService.retrieve_all()
