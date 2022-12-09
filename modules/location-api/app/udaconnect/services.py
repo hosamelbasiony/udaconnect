@@ -30,10 +30,8 @@ class LocationService:
 
     @staticmethod
     def person(person_id) -> List[Location]:
-        locations = (
-            db.session.query(Location)
-            .filter(Location.person_id == person_id)
-            .all()
-        )
+        locations: List = db.session.query(Location).filter(
+            Location.person_id == person_id
+        ).all()
         return locations
 
