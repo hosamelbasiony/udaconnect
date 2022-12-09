@@ -128,6 +128,6 @@ steps/
 helpers/
 db/docker/
 
-aliases.md
+aliases.sh
 updateapp.sh
 git.sh

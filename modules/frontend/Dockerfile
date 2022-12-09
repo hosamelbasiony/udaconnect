@@ -19,5 +19,5 @@ EXPOSE 3000
 
 CMD ["npm", "start"]
 
-# ./update_container.sh v1.4.8
+# ./update_container.sh v1.4.9
 

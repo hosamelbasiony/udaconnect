@@ -1,0 +1,95 @@
+openapi: 3.0.0
+servers:
+  - description: Udaconnec new REST API routes
+    url: http://135.181.92.250:30002/api
+info:
+  description: Udaconnec new REST API routes
+  version: "1.0.0"
+  title: Udaconnec new REST API routes
+  contact:
+    email: hosamelbasiony@gmail.com
+tags:
+  - name: developers
+    description: Udaconnect developers
+paths:
+  /locations:
+    get:
+      tags:
+        - developers
+      summary: returns all locations
+      operationId: searchInventory
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: bad request
+  /locations/{id}:
+    get:
+      summary: Get a saved location by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the location to get
+      responses:
+        '200':
+          description: search result matching criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: bad request
+  /person/locations/{person_id}:
+    get:
+      summary: Get all locations for a given person ID
+      parameters:
+        - in: path
+          name: person_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the person to get locations for
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: bad request
+components:
+  schemas:
+    Location:
+      type: object
+      required:
+        - longitude
+        - latitude
+        - person_id
+        - creation_time
+      properties:
+        id:
+          type: integer
+        person_id:
+          type: integer
+        longitude:
+          type: string
+        latitude:
+          type: string
+        creation_time:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.000000'

@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "a37de220-233b-4696-a2d0-6a151cbb6328",
+		"name": "UDACITY-UDACONNECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2798790"
+	},
+	"item": [
+		{
+			"name": "All person locations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/person/locations/1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"person",
+						"locations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post location",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"person_id\": 5, \r\n    \"longitude\": \"35.605240974982332\", \r\n    \"latitude\": \"31.29687938287871\",\r\n    \"creation_time\": \"2022-08-18 10:37:06.000000\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/locations",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/locations/100",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"locations",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://135.181.92.250:30002/api",
+			"type": "string"
+		}
+	]
+}

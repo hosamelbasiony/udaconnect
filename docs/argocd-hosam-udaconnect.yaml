@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: udaconnect-udacity-hosam-v0.0.1
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=true
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: helm-manifests
+    repoURL: https://github.com/hosamelbasiony/udaconnect.git
+    targetRevision: HEAD
+  syncPolicy: {}

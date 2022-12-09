@@ -8,7 +8,7 @@
 ### This is a good candidate for refactoring
 <br />
 
-![alt text](images/image1.png)
+![alt text](image1.png)
 <br /><br />
 # Messaging passing strategies used
 - ### For the front-end facing routes REST APIs are used
@@ -17,7 +17,7 @@
 - ### gRPC prtocol is used to carry the messages from the Kafka consumer in the locations microservice to the websocket microservice
 <br />
 
-![alt text](images/image2.png)
+![alt text](architecture_design.png)
 <br /><br />
 
 # Rationale for using various message passing protocols:
@@ -27,7 +27,8 @@
 
 ## gRPC
 - ### gRPC is used where typing is essential for inter-microservice messaging
-- ### gRPC provide standard messaging system even if we decide later on to implement other technologies or recruit other teams in the futures
+- ### gRPC provide standard messaging system with structured data even if we decide later on to implement other technologies or recruit other teams in the futures
+- ### gRPC uses HTP/2
 
 ## Message Queues
 - ### Message queueing is used where enormous amount of data is expected (in the locations <b>POST</b> route) to accomodate the events in a way that prevents data loss
