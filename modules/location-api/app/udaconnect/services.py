@@ -12,8 +12,6 @@ from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchem
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
-# from app.udaconnect.grpc_service import run_grpc_client
-
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("udaconnect-api")
 
@@ -85,14 +83,12 @@ class ConnectionService:
 
         return result
 
-
-class LocationService:
     @staticmethod
-    def retrieve(location_id) -> Location:
+    def person(person_id) -> Location:
         location, coord_text = (
             db.session.query(Location, Location.coordinate.ST_AsText())
-            .filter(Location.id == location_id)
-            .one()
+            .filter(Location.person_id == person_id)
+            .all()
         )
 
         # Rely on database to return text form of point to reduce overhead of conversion in app code
@@ -100,56 +96,73 @@ class LocationService:
         return location
 
     @staticmethod
-    def create(location: Dict) -> Location:
-        validation_results: Dict = LocationSchema().validate(location)
-        if validation_results:
-            logger.warning(f"Unexpected data format in payload: {validation_results}")
-            raise Exception(f"Invalid payload: {validation_results}")
+    def retrieve_all() -> List[Location]:
+        return db.session.query(Location).all()
 
-        new_location = Location()
-        new_location.person_id = location["person_id"]
-        new_location.creation_time = location["creation_time"]
-        new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
-        db.session.add(new_location)
-        db.session.commit()
+# class LocationService:
+#     @staticmethod
+#     def retrieve(location_id) -> Location:
+#         location, coord_text = (
+#             db.session.query(Location, Location.coordinate.ST_AsText())
+#             .filter(Location.id == location_id)
+#             .one()
+#         )
 
-        # location = {
-        #     "person_id": location["person_id"],
-        #     "person_name": "Yet to get- Name",
-        #     "latitude": location["latitude"],
-        #     "longitude": location["longitude"],
-        #     "creation_time": location["creation_time"]
-        # }
-        # producer = g.kafka_producer
-        # producer.send("location", location)
-        # producer.flush()
+#         # Rely on database to return text form of point to reduce overhead of conversion in app code
+#         location.wkt_shape = coord_text
+#         return location
 
-        # # alert notification service with grpc
-        # b = threading.Thread(name='run_grpc_client', target=run_grpc_client, args=(location,))
-        # b.daemon = True
-        # b.start()
+#     @staticmethod
+#     def create(location: Dict) -> Location:
+#         validation_results: Dict = LocationSchema().validate(location)
+#         if validation_results:
+#             logger.warning(f"Unexpected data format in payload: {validation_results}")
+#             raise Exception(f"Invalid payload: {validation_results}")
 
-        return new_location
+#         new_location = Location()
+#         new_location.person_id = location["person_id"]
+#         new_location.creation_time = location["creation_time"]
+#         new_location.coordinate = ST_Point(location["latitude"], location["longitude"])
+#         db.session.add(new_location)
+#         db.session.commit()
+
+#         # location = {
+#         #     "person_id": location["person_id"],
+#         #     "person_name": "Yet to get- Name",
+#         #     "latitude": location["latitude"],
+#         #     "longitude": location["longitude"],
+#         #     "creation_time": location["creation_time"]
+#         # }
+#         # producer = g.kafka_producer
+#         # producer.send("location", location)
+#         # producer.flush()
+
+#         # # alert notification service with grpc
+#         # b = threading.Thread(name='run_grpc_client', target=run_grpc_client, args=(location,))
+#         # b.daemon = True
+#         # b.start()
+
+#         return new_location
 
 
-class PersonService:
-    @staticmethod
-    def create(person: Dict) -> Person:
-        new_person = Person()
-        new_person.first_name = person["first_name"]
-        new_person.last_name = person["last_name"]
-        new_person.company_name = person["company_name"]
+# class PersonService:
+#     @staticmethod
+#     def create(person: Dict) -> Person:
+#         new_person = Person()
+#         new_person.first_name = person["first_name"]
+#         new_person.last_name = person["last_name"]
+#         new_person.company_name = person["company_name"]
 
-        db.session.add(new_person)
-        db.session.commit()
+#         db.session.add(new_person)
+#         db.session.commit()
 
-        return new_person
+#         return new_person
 
-    @staticmethod
-    def retrieve(person_id: int) -> Person:
-        person = db.session.query(Person).get(person_id)
-        return person
+#     @staticmethod
+#     def retrieve(person_id: int) -> Person:
+#         person = db.session.query(Person).get(person_id)
+#         return person
 
-    @staticmethod
-    def retrieve_all() -> List[Person]:
-        return db.session.query(Person).all()
+#     @staticmethod
+#     def retrieve_all() -> List[Person]:
+#         return db.session.query(Person).all()

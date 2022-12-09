@@ -19,3 +19,15 @@
 
 ![alt text](images/image2.png)
 <br /><br />
+
+# Rationale for using various message passing protocols:
+## REST APIs
+- ### REST APIs are the most suitable for endpoints intefacing with the users because it is flexible, easy to implement, and provides stateless client-server relationship
+- ### REST APIs are the most popular choice in this context and we have no reason to adopt any other protocol
+
+## gRPC
+- ### gRPC is used where typing is essential for inter-microservice messaging
+- ### gRPC provide standard messaging system even if we decide later on to implement other technologies or recruit other teams in the futures
+
+## Message Queues
+- ### Message queueing is used where enormous amount of data is expected (in the locations <b>POST</b> route) to accomodate the events in a way that prevents data loss
