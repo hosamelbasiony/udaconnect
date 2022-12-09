@@ -58,7 +58,10 @@ class LocationResource(Resource):
 class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self) ->List[Location]:
-        return LocationService.retrieve_all()
+        locations = LocationService.retrieve_all()
+        jsonStr = json.dumps([obj.__dict__ for obj in locations])
+        print(jsonStr)
+        return jsonStr
 
 @api.route("/person/locations/<person_id>")
 @api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
@@ -67,4 +70,7 @@ class LocationResource(Resource):
 class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, person_id) -> List[Location]:
-        return LocationService.person(person_id)
+        locations = LocationService.person(person_id)
+        jsonStr = json.dumps([obj.__dict__ for obj in locations])
+        print(jsonStr)
+        return jsonStr
