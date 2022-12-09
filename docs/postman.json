@@ -94,6 +94,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete person",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl1}}/persons/4",
+					"host": [
+						"{{baseurl1}}"
+					],
+					"path": [
+						"persons",
+						"4"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

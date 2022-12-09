@@ -71,6 +71,27 @@ paths:
                   $ref: '#/components/schemas/Location'
         '400':
           description: bad request
+  /person/{id}:
+    delete:
+      summary: Deletes a person by ID - with related locations
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the person to delete
+      responses:
+        '200':
+          description: person deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Person'
+        '400':
+          description: bad request
 components:
   schemas:
     Location:
@@ -93,3 +114,18 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.000000'
+    Person:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: integer
+        last_name:
+          type: string
+        company_name:
+          type: string
