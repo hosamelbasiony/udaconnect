@@ -11,6 +11,6 @@ EXPOSE 5001
 COPY . .
 CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5001"]
 
-# sudo ./update_container.sh v1.0.0
+# sudo ./update_container.sh v1.0.2
 
 # flask run --host 0.0.0.0 --port 5001

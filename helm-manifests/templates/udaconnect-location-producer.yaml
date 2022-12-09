@@ -33,7 +33,7 @@ spec:
         service: udaconnect-locations-api
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-location-api:v1.0.1
+      - image: hosamelbasiony/udaconnect-location-api:v1.0.2
         name: udaconnect-locations-api
         imagePullPolicy: Always
         env:
