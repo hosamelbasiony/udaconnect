@@ -9,8 +9,8 @@ RUN pip install -r requirements.txt
 EXPOSE 5003
 
 COPY . .
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5001"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5003"]
 
-# sudo ./update_container.sh v1.0.3
+# sudo ./update_container.sh v1.0.5
 
-# flask run --host 0.0.0.0 --port 5001
+# flask run --host 0.0.0.0 --port 5003
