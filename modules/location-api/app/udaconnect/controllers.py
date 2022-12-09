@@ -58,6 +58,5 @@ class LocationResource(Resource):
 @api.doc(resposes={404: "Query not found"})
 class LocationResource(Resource):
     @responds(schema=LocationSchema)
-    def get(self, person_id) -> Location:
-        location: Location = LocationService.person(person_id)
-        return location
+    def get(self, person_id) ->List[Location]:
+        return LocationService.person(person_id)
