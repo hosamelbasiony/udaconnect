@@ -9,6 +9,8 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 COPY . .
-CMD ["flask", "run", "--host", "0.0.0.0"]
 
-# sudo ./update_container.sh v1.0.1
+# CMD ["flask", "run", "--host", "0.0.0.0"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000"]
+
+# sudo ./update_container.sh v1.0.2
