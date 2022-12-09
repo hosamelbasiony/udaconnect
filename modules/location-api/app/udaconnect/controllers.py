@@ -1,6 +1,5 @@
 from datetime import datetime
 import time
-import json
 
 from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import (
@@ -60,9 +59,11 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self) ->List[Location]:
         locations = LocationService.retrieve_all()
-        jsonStr = json.dumps([obj.__dict__ for obj in locations])
-        print(jsonStr)
-        return jsonStr
+        print(locations)
+        return {
+            "success": "OK"
+            "locations": locations
+        }
 
 @api.route("/person/locations/<person_id>")
 @api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
@@ -72,6 +73,8 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, person_id) -> List[Location]:
         locations = LocationService.person(person_id)
-        jsonStr = json.dumps([obj.__dict__ for obj in locations])
-        print(jsonStr)
-        return jsonStr
+        print(locations)
+        return {
+            "success": "OK"
+            "locations": locations
+        }
