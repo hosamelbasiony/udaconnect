@@ -19,6 +19,16 @@ api = Namespace("UdaConnect", description="Connections via geolocation.")  # noq
 
 # TODO: This needs better exception handling
 
+@api.route("/person/locations/<person_id>")
+@api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
+# @api.doc(resposes={200: "Success"})
+# @api.doc(resposes={404: "Query not found"})
+class LocationResource(Resource):
+    @responds(schema=LocationSchema)
+    def get(self, person_id) -> Location:
+        location: Location = LocationService.person(person_id)
+        return location
+
 @api.route("/locations")
 @api.route("/locations/<location_id>")
 @api.param("location_id", "Unique ID for a given Location", _in="query")
@@ -50,14 +60,4 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, location_id) -> Location:
         location: Location = LocationService.retrieve(location_id)
-        return location
-
-@api.route("/person/locations/<person_id>")
-@api.param("person_id", "ID of the persons to list all of his recorded locations", _in="query")
-@api.doc(resposes={200: "Success"})
-@api.doc(resposes={404: "Query not found"})
-class LocationResource(Resource):
-    @responds(schema=LocationSchema)
-    def get(self, person_id) -> Location:
-        location: Location = LocationService.person(person_id)
         return location
