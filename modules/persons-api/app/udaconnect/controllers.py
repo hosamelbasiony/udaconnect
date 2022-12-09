@@ -38,6 +38,8 @@ class LocationResource(Resource):
 
 
 @api.route("/persons")
+@api.route("/persons/<person_id>")
+@api.param("person_id", "Unique ID for a given Person to delete", _in="query")
 class PersonsResource(Resource):
     @accepts(schema=PersonSchema)
     @responds(schema=PersonSchema)
