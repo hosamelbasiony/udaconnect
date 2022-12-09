@@ -11,6 +11,6 @@ EXPOSE 5000
 COPY . .
 
 # CMD ["flask", "run", "--host", "0.0.0.0"]
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["python", "wsgi.py"]
 
-# sudo ./update_container.sh v1.0.2
+# sudo ./update_container.sh v1.0.3
