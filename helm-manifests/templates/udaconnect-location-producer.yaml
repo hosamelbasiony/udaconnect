@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: udaconnect-kafka-producer
-  name: udaconnect-kafka-producer
+    service: udaconnect-locations-api
+  name: udaconnect-locations-api
   namespace: {{ .Values.namespace.name }}
 spec:
   ports:
@@ -12,29 +12,29 @@ spec:
     targetPort: 5001
     nodePort: 30002
   selector:
-    service: udaconnect-kafka-producer
+    service: udaconnect-locations-api
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: udaconnect-kafka-producer
-  name: udaconnect-kafka-producer
+    service: udaconnect-locations-api
+  name: udaconnect-locations-api
   namespace: {{ .Values.namespace.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: udaconnect-kafka-producer
+      service: udaconnect-locations-api
   template:
     metadata:
       labels:
-        service: udaconnect-kafka-producer
+        service: udaconnect-locations-api
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-location-api:v1.0.0
-        name: udaconnect-kafka-producer
+      - image: hosamelbasiony/udaconnect-location-api:v1.0.1
+        name: udaconnect-locations-api
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
