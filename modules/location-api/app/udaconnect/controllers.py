@@ -1,5 +1,6 @@
 from datetime import datetime
 import time
+import json
 
 from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import (
