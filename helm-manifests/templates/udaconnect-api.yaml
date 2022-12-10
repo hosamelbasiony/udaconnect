@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       # - image: udacity/nd064-udaconnect-api:latest
-      - image: hosamelbasiony/udaconnect-persons-api:v1.0.9
+      - image: hosamelbasiony/udaconnect-persons-api:v1.2.0
         name: udaconnect-api
         imagePullPolicy: Always
         env:
