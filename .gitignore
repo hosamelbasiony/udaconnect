@@ -131,3 +131,4 @@ db/docker/
 aliases.sh
 updateapp.sh
 git.sh
+updatedockerhub.sh
