@@ -5,6 +5,8 @@ metadata:
     service: udaconnect-notifications-service
   name: udaconnect-notifications-service
   namespace: {{ .Values.namespace.name }}
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
 spec:
   ports:
   - name: "5005"
