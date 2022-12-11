@@ -128,6 +128,8 @@ config={
                         service_name="service")
 jaeger_tracer = config.initialize_tracer()
 tracing = FlaskTracing(jaeger_tracer, True, app)
+with jaeger_tracer.start_span("first-span") as span:
+    span.set_tag("first-tag", "100")
 ################################################################
 ################################################################
 
