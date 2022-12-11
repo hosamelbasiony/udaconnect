@@ -17,3 +17,5 @@ EXPOSE 3000
 
 CMD ["npm", "start"]
 
+# cd modules/frontend
+# sudo ./update_container.sh v1.5.0
