@@ -8,6 +8,7 @@ from jaeger_client import Config
 from flask_opentracing import FlaskTracing
 
 db = SQLAlchemy()
+tracing = None
 
 def create_app(env=None):
     from app.config import config_by_name
