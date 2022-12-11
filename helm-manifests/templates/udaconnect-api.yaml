@@ -5,6 +5,8 @@ metadata:
   labels:
     service: udaconnect-api
   name: udaconnect-api
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
 spec:
   ports:
   - name: "5000"
