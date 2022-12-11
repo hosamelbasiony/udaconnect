@@ -35,7 +35,7 @@ spec:
         service: udaconnect-api
     spec:
       containers:
-      - image: hosamelbasiony/udaconnect-persons-api:v1.2.3
+      - image: hosamelbasiony/udaconnect-persons-api:v1.2.4
         name: udaconnect-api
         imagePullPolicy: Always
         env:

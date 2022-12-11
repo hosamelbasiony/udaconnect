@@ -19,31 +19,31 @@ def create_app(env=None):
     app.config.from_object(config_by_name[env or "test"])
     api = Api(app, title="UdaConnect API", version="0.1.0")
 
-    ################################################################
-    ################################################################
-    ## TRACING #####################################################
-    ################################################################    
-    config = Config(
-    config={
-        'sampler':
-        {'type': 'const',
-         'param': 1},
-                        'logging': True,
-                        'reporter_batch_size': 1,}, 
-                        service_name="service")
+    # ################################################################
+    # ################################################################
+    # ## TRACING #####################################################
+    # ################################################################    
+    # config = Config(
+    # config={
+    #     'sampler':
+    #     {'type': 'const',
+    #      'param': 1},
+    #                     'logging': True,
+    #                     'reporter_batch_size': 1,}, 
+    #                     service_name="service")
                         
-    jaeger_tracer = config.initialize_tracer()
-    tracing = FlaskTracing(jaeger_tracer, True, app)
-    ################################################################
-    ################################################################
+    # jaeger_tracer = config.initialize_tracer()
+    # tracing = FlaskTracing(jaeger_tracer, True, app)
+    # ################################################################
+    # ################################################################
 
     CORS(app)  # Set CORS for development
 
     register_routes(api, app)
     db.init_app(app)
 
-    with tracing.start_span("first-span") as span:
-        span.set_tag("first-tag", "100")
+    # with tracing.start_span("first-span") as span:
+    #     span.set_tag("first-tag", "100")
 
     @app.route("/health")
     def health():
