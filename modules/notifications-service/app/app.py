@@ -125,7 +125,7 @@ config={
         'param': 1},
                         'logging': True,
                         'reporter_batch_size': 1,}, 
-                        service_name="service")
+                        service_name="udaconnect-service")
 jaeger_tracer = config.initialize_tracer()
 tracing = FlaskTracing(jaeger_tracer, True, app)
 with jaeger_tracer.start_span("first-span") as span:
