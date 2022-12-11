@@ -17,3 +17,5 @@ python-socketio==5.7.2
 typing-extensions==4.4.0
 Werkzeug==2.2.2
 zipp==3.11.0
+jaeger-client==4.8.0
+Flask-OpenTracing==1.1.0

@@ -11,6 +11,10 @@ import threading
 import multiprocessing
 from concurrent import futures
 
+import logging
+from jaeger_client import Config
+from flask_opentracing import FlaskTracing
+
 def callback(gt, *args, **kwargs): 
     """ this function is called when results are available """ 
     result = gt.wait() 
@@ -106,8 +110,36 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret!"
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+
+#################################################################
+################################################################
+## TRACING #####################################################
+################################################################    
+import logging  
+from jaeger_client import Config
+from flask_opentracing import FlaskTracing  
+config = Config(
+config={
+        'sampler':
+        {'type': 'const',
+        'param': 1},
+                        'logging': True,
+                        'reporter_batch_size': 1,}, 
+                        service_name="service")
+jaeger_tracer = config.initialize_tracer()
+tracing = FlaskTracing(jaeger_tracer, True, app)
+################################################################
+################################################################
+
+
 def root():
     return app.send_static_file("index.html")
+
+@app.route("/ping")
+def health():
+    return jsonify({
+        "payload": "Pong"
+    })
 
 @socketio.on("connect", namespace="/locationCheckin")
 def connectServer():
