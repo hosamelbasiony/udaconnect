@@ -48,7 +48,7 @@ spec:
                 name: db-env
                 key: REACT_APP_WS_URL
           - name: REACT_APP_LOCATIONS_API_URL
-            value: "http://http://167.235.227.66/:30004/api"
+            value: "http://167.235.227.66:30004/api"
         resources:
           requests:
             memory: "1024Mi"
