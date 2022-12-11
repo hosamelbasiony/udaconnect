@@ -1,7 +1,7 @@
 #!/bin/bash
 
 kubectl delete service kubernetes 
-kubectl delete service kafka      
+kubectl delete service kafka     
 kubectl delete service postgres    
 kubectl delete service udaconnect-locations-api
 kubectl delete service udaconnect-app           
