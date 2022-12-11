@@ -8,6 +8,7 @@ from jaeger_client import Config
 from flask_opentracing import FlaskTracing
 
 db = SQLAlchemy()
+
 tracing = None
 
 def create_app(env=None):
@@ -40,6 +41,9 @@ def create_app(env=None):
 
     register_routes(api, app)
     db.init_app(app)
+
+    with tracing.start_span("first-span") as span:
+        span.set_tag("first-tag", "100")
 
     @app.route("/health")
     def health():

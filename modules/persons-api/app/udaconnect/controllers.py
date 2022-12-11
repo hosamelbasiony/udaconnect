@@ -11,14 +11,9 @@ from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 from typing import Optional, List
 
-from app import tracing
-
 DATE_FORMAT = "%Y-%m-%d"
 
 api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
-
-with tracing.start_span("first-span") as span:
-    span.set_tag("first-tag", "100")
 
 @api.route("/persons")
 @api.route("/persons/<person_id>")
